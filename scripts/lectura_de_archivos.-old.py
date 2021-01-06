@@ -8,8 +8,6 @@ Created on Wed Dec 16 23:05:05 2020
 
 import pandas as pd
 import os
-import random 
-import string 
 import time
 from datetime import datetime as dt
 
@@ -47,10 +45,6 @@ def visualizar_datos(dataFrame):
 
     for col in dataFrame_cols:
         print(dataFrame[col])
-        
-        
-def ran_gen(size, chars=string.ascii_uppercase + string.digits): 
-    return ''.join(random.choice(chars) for x in range(size))     
 
 
 def exportar_datos(dataFrame):
@@ -60,7 +54,7 @@ def exportar_datos(dataFrame):
     time.sleep(2)
     
     increment=0
-
+    
     #table_name = 'CEPAL_T_D_FORM_FORMULARIO'
 
     with open("../output/script.sql", "w" , encoding="utf-8"):
@@ -187,12 +181,16 @@ def exportar_datos(dataFrame):
             
             
             if row['AVISOS Y NOTIFICACIONES'] == 'SI':
-                print("INSERT INTO CEPAL_T_D_PAEL_PAGI_ELCO (CO_ID, PAEL_CO_PAGINA,PAEL_CO_ELEMENTOCOMPUESTO,PAEL_CO_PREFIJO_REUTILIZABLE,PAEL_CO_ID_VISTA,PAEL_NU_ORDEN_ELEM_COMP,IN_ELIMINADO,FE_FECHA_CREACION,CO_USUARIO_CREACION) VALUES ((SELECT LOWER(DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW ('CON_CES_DO_B",increment,"', 'AL32UTF8'))) Alias from dual),(SELECT CO_ID FROM CEPAL_T_D_PAGI_PAGINA WHERE PAGI_CO_CODIGO = 'AVISOS' AND PAGI_CO_FORMULARIO = '",row['CÓDIGO DE PLANTILLA'],"'), (SELECT CO_ID FROM (SELECT CO_ID, ELCO_NU_VERSION FROM CEPAL_T_D_ELCO_ELEM_COMPUESTO WHERE ELCO_CO_CODIGO = 'INFO_NOTIFICACIONES' AND ELCO_IN_REUTILIZABLE=1 AND ELCO_IN_VIGENTE=1  ORDER BY ELCO_NU_VERSION DESC) WHERE  ROWNUM = 1) , 'RCM_' , 'contenedor_nb2PrG9QIu' , 0, 0, SYSDATE,(SELECT CO_ID FROM CEPAL_T_D_USUA_USUARIOS WHERE USUA_LI_LOGIN = '00000000T'AND IN_ELIMINADO = 0 ));",sep="" , file=open("../output/script.sql", "a"))
+                print("INSERT INTO CEPAL_T_D_PAEL_PAGI_ELCO (CO_ID, PAEL_CO_PAGINA,PAEL_CO_ELEMENTOCOMPUESTO,PAEL_CO_PREFIJO_REUTILIZABLE,PAEL_CO_ID_VISTA,PAEL_NU_ORDEN_ELEM_COMP,IN_ELIMINADO,FE_FECHA_CREACION,CO_USUARIO_CREACION) VALUES ((SELECT LOWER(DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW ('CON_CES_DO_B",increment,"', 'AL32UTF8'))) Alias from dual),(SELECT CO_ID FROM CEPAL_T_D_PAGI_PAGINA WHERE PAGI_CO_CODIGO = 'AVISOS' AND PAGI_CO_FORMULARIO = '",row['CÓDIGO DE PLANTILLA'],"'), (SELECT CO_ID FROM (SELECT CO_ID, ELCO_NU_VERSION FROM CEPAL_T_D_ELCO_ELEM_COMPUESTO WHERE ELCO_CO_CODIGO = 'GDPR' AND ELCO_IN_REUTILIZABLE=1 AND ELCO_IN_VIGENTE=1  ORDER BY ELCO_NU_VERSION DESC) WHERE  ROWNUM = 1) , 'RCM_' , 'contenedor_nb2PrG9QIu' , 0, 0, SYSDATE,(SELECT CO_ID FROM CEPAL_T_D_USUA_USUARIOS WHERE USUA_LI_LOGIN = '00000000T'AND IN_ELIMINADO = 0 ));",sep="" , file=open("../output/script.sql", "a"))
          
             
             if row['DECLARACIÓN RESPONSABLE'] == 'SI':
                 print("INSERT INTO CEPAL_T_D_PAEL_PAGI_ELCO (CO_ID, PAEL_CO_PAGINA,PAEL_CO_ELEMENTOCOMPUESTO,PAEL_CO_PREFIJO_REUTILIZABLE,PAEL_CO_ID_VISTA,PAEL_NU_ORDEN_ELEM_COMP,IN_ELIMINADO,FE_FECHA_CREACION,CO_USUARIO_CREACION) VALUES ((SELECT LOWER(DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW ('CON_CES_DO_C",increment,"', 'AL32UTF8'))) Alias from dual) , (SELECT CO_ID FROM CEPAL_T_D_PAGI_PAGINA WHERE PAGI_CO_CODIGO = 'GDPR_PAGE' AND PAGI_CO_FORMULARIO = '",row['CÓDIGO DE PLANTILLA'],"'), (SELECT CO_ID FROM (SELECT CO_ID, ELCO_NU_VERSION FROM CEPAL_T_D_ELCO_ELEM_COMPUESTO WHERE ELCO_CO_CODIGO = 'GDPR' AND ELCO_IN_REUTILIZABLE=1 AND ELCO_IN_VIGENTE=1  ORDER BY ELCO_NU_VERSION DESC) WHERE  ROWNUM = 1) , 'RCM_' , 'contenedor_nb2PrG9QIu' , 0, 0, SYSDATE,(SELECT CO_ID FROM CEPAL_T_D_USUA_USUARIOS WHERE USUA_LI_LOGIN = '00000000T'AND IN_ELIMINADO = 0 ));" ,sep="", file=open("../output/script.sql", "a"))
             
+                  
+            
+            
+
 
 
     print("Exportando archivo...")
