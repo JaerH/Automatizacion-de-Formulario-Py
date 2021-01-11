@@ -12,12 +12,11 @@ import time
 from datetime import datetime as dt
 
 
-def main():
+def main(): 
 
     df = leer_archivos()
     # visualizar_datos(df)
     exportar_datos(df)
-
 
 def leer_archivos():
 
